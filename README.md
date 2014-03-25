@@ -1,4 +1,4 @@
 QuickReturnGridView
 ===================
 
-An experiment 
+An experiment for adding QuickReturn views for GridView 
