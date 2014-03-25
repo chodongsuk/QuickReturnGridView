@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="tw.jimytc.quickreturngridview.MainActivity$PlaceholderFragment" >
+
+    <GridView
+        android:id="@+id/gridview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="@integer/gridview_column"
+        android:gravity="center"
+        android:listSelector="@android:color/transparent" />
+
+    <Button
+        android:id="@+id/sticky"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sticky_header_height"
+        android:text="@string/sticky" />
+
+</RelativeLayout>
