@@ -6,8 +6,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <!-- Column numbers for Gridview -->
-    <integer name="gridview_column">2</integer>
+    <integer name="gridview_column">1</integer>
 
     <!-- Sticky header height -->
-    <dimen name="sticky_header_height">60dp</dimen>
+    <dimen name="sticky_header_height">48dp</dimen>
 </resources>
