@@ -56,13 +56,8 @@ public class MainActivity extends ActionBarActivity {
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container,
-                    false);
-            mGridView = (QuickReturnGridView) rootView.findViewById(R.id.gridview);
-            mQuickReturnView = rootView.findViewById(R.id.sticky);
-
+        public void onActivityCreated(Bundle savedInstanceState) {
+            super.onActivityCreated(savedInstanceState);
             int numColumn = getResources().getInteger(R.integer.gridview_column);
             int placeholderHeight = getResources().getDimensionPixelSize(R.dimen.sticky_header_height);
             String[] data = getResources().getStringArray(R.array.gridview_items);
@@ -150,6 +145,15 @@ public class MainActivity extends ActionBarActivity {
                 public void onScrollStateChanged(AbsListView view, int scrollState) {
                 }
             });
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_main, container,
+                    false);
+            mGridView = (QuickReturnGridView) rootView.findViewById(R.id.gridview);
+            mQuickReturnView = rootView.findViewById(R.id.sticky);
 
             return rootView;
         }
@@ -182,14 +186,14 @@ public class MainActivity extends ActionBarActivity {
                     convertView = new View(getContext());
                 }
                 convertView.setLayoutParams(mPlaceholderParams);
-                view = convertView;
             } else {
                 if (convertView != null && !(convertView instanceof TextView)) {
                     convertView = null;
                 }
                 int realPosition = position - mGridViewColumnNum;
-                view = super.getView(realPosition, convertView, parent);
+                convertView = super.getView(realPosition, convertView, parent);
             }
+            view = convertView;
             int colorSelector = position % 4;
             int color = Color.BLACK;
             switch (colorSelector) {
