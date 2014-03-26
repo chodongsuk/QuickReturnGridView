@@ -40,17 +40,12 @@ public class QuickReturnGridView extends GridView {
         }
         for (int i = 0; i < mItemCount; i += numColumn) {
             View view = getAdapter().getView(i, null, this);
-            ViewGroup.LayoutParams param = view.getLayoutParams();
             int realIndex = i / numColumn;
             mItemOffsetY[realIndex] = mHeight;
-            if (param.height > -1) {
-                mHeight += param.height;
-            } else {
-                view.measure(
-                    MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
-                    MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
-                mHeight += view.getMeasuredHeight();
-            }
+            view.measure(
+                MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
+                MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+            mHeight += view.getMeasuredHeight();
         }
         scrollIsComputed = true;
     }

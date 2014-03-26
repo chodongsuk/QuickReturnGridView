@@ -15,7 +15,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -61,7 +61,7 @@ public class MainActivity extends ActionBarActivity {
             int numColumn = getResources().getInteger(R.integer.gridview_column);
             int placeholderHeight = getResources().getDimensionPixelSize(R.dimen.sticky_header_height);
             String[] data = getResources().getStringArray(R.array.gridview_items);
-            mAdapter = new PlaceholderAdapter(getActivity(), R.layout.grid_item,
+            mAdapter = new PlaceholderAdapter(getActivity(), R.layout.grid_item, R.id.content_text,
                     data, numColumn, placeholderHeight);
             mGridView.setAdapter(mAdapter);
 
@@ -163,13 +163,13 @@ public class MainActivity extends ActionBarActivity {
 
         private int mGridViewColumnNum;
         private int mPlaceholderHeight;
-        AbsListView.LayoutParams mPlaceholderParams;
+        LinearLayout.LayoutParams mPlaceholderParams;
 
-        public PlaceholderAdapter(Context context, int resource, String[] data, int numColumn, int placeholderHeight) {
-            super(context, resource, data);
+        public PlaceholderAdapter(Context context, int resource, int textViewId, String[] data, int numColumn, int placeholderHeight) {
+            super(context, resource, textViewId, data);
             mGridViewColumnNum = numColumn;
             mPlaceholderHeight = placeholderHeight;
-            mPlaceholderParams = new AbsListView.LayoutParams(1, mPlaceholderHeight);
+            mPlaceholderParams = new LinearLayout.LayoutParams(1, mPlaceholderHeight);
         }
 
         @Override
@@ -182,12 +182,12 @@ public class MainActivity extends ActionBarActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             View view = null;
             if (position < mGridViewColumnNum) {
-                if (convertView == null || (convertView instanceof TextView)) {
-                    convertView = new View(getContext());
+                if (convertView == null || convertView.getId() != R.id.placeholder_container) {
+                    convertView = LayoutInflater.from(getContext()).inflate(R.layout.placeholder, null, false);
                 }
-                convertView.setLayoutParams(mPlaceholderParams);
+                convertView.findViewById(R.id.placeholder_dummy).setLayoutParams(mPlaceholderParams);
             } else {
-                if (convertView != null && !(convertView instanceof TextView)) {
+                if (convertView != null && convertView.getId() == R.id.placeholder_container) {
                     convertView = null;
                 }
                 int realPosition = position - mGridViewColumnNum;
