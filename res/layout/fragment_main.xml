@@ -12,7 +12,10 @@
         android:layout_height="match_parent"
         android:numColumns="@integer/gridview_column"
         android:gravity="center"
-        android:listSelector="@android:color/transparent" />
+        android:listSelector="@android:color/transparent"
+        android:paddingTop="@dimen/sticky_header_height"
+        android:clipToPadding="false"
+        android:fadingEdge="none" />
 
     <LinearLayout
         android:id="@+id/sticky"

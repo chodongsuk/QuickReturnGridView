@@ -58,11 +58,9 @@ public class MainActivity extends Activity {
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
-            int numColumn = getResources().getInteger(R.integer.gridview_column);
-            int placeholderHeight = getResources().getDimensionPixelSize(R.dimen.sticky_header_height);
             String[] data = getResources().getStringArray(R.array.gridview_items);
             mAdapter = new PlaceholderAdapter(getActivity(), R.layout.grid_item, R.id.content_text,
-                    data, numColumn, placeholderHeight);
+                    data);
             mGridView.setAdapter(mAdapter);
 
             mGridView.getViewTreeObserver().addOnGlobalLayoutListener(
@@ -161,39 +159,17 @@ public class MainActivity extends Activity {
 
     public static class PlaceholderAdapter extends ArrayAdapter<String> {
 
-        private int mGridViewColumnNum;
-        private int mPlaceholderHeight;
         LinearLayout.LayoutParams mPlaceholderParams;
 
-        public PlaceholderAdapter(Context context, int resource, int textViewId, String[] data, int numColumn, int placeholderHeight) {
+        public PlaceholderAdapter(Context context, int resource, int textViewId, String[] data) {
             super(context, resource, textViewId, data);
-            mGridViewColumnNum = numColumn;
-            mPlaceholderHeight = placeholderHeight;
-            mPlaceholderParams = new LinearLayout.LayoutParams(1, mPlaceholderHeight);
-        }
-
-        @Override
-        public int getCount() {
-            int count = super.getCount();
-            return count + mGridViewColumnNum;
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view = null;
-            if (position < mGridViewColumnNum) {
-                if (convertView == null || convertView.getId() != R.id.placeholder_container) {
-                    convertView = LayoutInflater.from(getContext()).inflate(R.layout.placeholder, null, false);
-                }
-                convertView.findViewById(R.id.placeholder_dummy).setLayoutParams(mPlaceholderParams);
-            } else {
-                if (convertView != null && convertView.getId() == R.id.placeholder_container) {
-                    convertView = null;
-                }
-                int realPosition = position - mGridViewColumnNum;
-                convertView = super.getView(realPosition, convertView, parent);
-            }
-            view = convertView;
+            convertView = (convertView != null) ? convertView :
+                    super.getView(position, convertView, parent);
+
             int colorSelector = position % 4;
             int color = Color.BLACK;
             switch (colorSelector) {
@@ -210,8 +186,9 @@ public class MainActivity extends Activity {
                     color = Color.GREEN;
                     break;
             }
-            view.setBackgroundColor(color);
-            return view;
+
+            convertView.setBackgroundColor(color);
+            return convertView;
         }
     }
 

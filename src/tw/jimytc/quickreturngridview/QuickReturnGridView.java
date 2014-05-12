@@ -3,7 +3,6 @@ package tw.jimytc.quickreturngridview;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.GridView;
 
 public class QuickReturnGridView extends GridView {
@@ -30,7 +29,7 @@ public class QuickReturnGridView extends GridView {
     }
 
     public void computeScrollY() {
-        mHeight = 0;
+        mHeight = getPaddingTop();
         mItemCount = getAdapter().getCount();
         int numColumn = getNumColumns();
         int halfNumColumn = (numColumn + 1) / 2;
