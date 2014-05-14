@@ -15,7 +15,6 @@ import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 
 public class MainActivity extends Activity {
 
