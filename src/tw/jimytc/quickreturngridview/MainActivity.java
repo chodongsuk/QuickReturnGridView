@@ -159,18 +159,18 @@ public class MainActivity extends Activity {
 
     public static class PlaceholderAdapter extends ArrayAdapter<String> {
 
-        LinearLayout.LayoutParams mPlaceholderParams;
+        private final int columnNum;
 
         public PlaceholderAdapter(Context context, int resource, int textViewId, String[] data) {
             super(context, resource, textViewId, data);
+            columnNum = context.getResources().getInteger(R.integer.gridview_column);
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            convertView = (convertView != null) ? convertView :
-                    super.getView(position, convertView, parent);
+            convertView = super.getView(position, convertView, parent);
 
-            int colorSelector = position % 4;
+            int colorSelector = (position / columnNum) % columnNum;
             int color = Color.BLACK;
             switch (colorSelector) {
                 case 0:

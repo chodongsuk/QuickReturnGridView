@@ -12,7 +12,6 @@
         android:layout_height="match_parent"
         android:numColumns="@integer/gridview_column"
         android:gravity="center"
-        android:listSelector="@android:color/transparent"
         android:paddingTop="@dimen/sticky_header_height"
         android:clipToPadding="false"
         android:fadingEdge="none" />
@@ -23,7 +22,7 @@
         android:layout_height="@dimen/sticky_header_height"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="@android:color/white" >
+        android:background="#66FFFFFF" >
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
